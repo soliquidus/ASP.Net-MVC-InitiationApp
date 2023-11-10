@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Collections.Generic;
+using System.Web.Mvc;
 
 namespace FirstApp.Controllers
 {
@@ -19,7 +20,7 @@ namespace FirstApp.Controllers
         {
             return View();
         }
-        
+
         // ContentResult Type
         public ActionResult GetEmpName(int empId)
         {
@@ -39,7 +40,7 @@ namespace FirstApp.Controllers
                     matchEmpName = employee.empName;
                 }
             }
-            
+
             // return new ContentResult() {Content = matchEmpName, ContentType = "text/plain"};
             return Content(matchEmpName, "text/plain");
         }
@@ -74,10 +75,18 @@ namespace FirstApp.Controllers
             {
                 return Content("Invalid emp id");
             }
-            else
-            {
-                return Redirect(fbUrl);
-            }
+
+            return Redirect(fbUrl);
+        }
+
+        public ActionResult StudentDetails()
+        {
+            ViewBag.StudentId = 101;
+            ViewBag.StudentName = "Scott";
+            ViewBag.Marks = 80;
+            ViewBag.NoOfSemesters = 6;
+            ViewBag.Subjects = new List<string>() { "Maths", "Physics", "Chemistry" };
+            return View();
         }
     }
 }
