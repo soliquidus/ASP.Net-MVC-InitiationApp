@@ -9,5 +9,11 @@ namespace FirstApp.Controllers
         {
             return View();
         }
+        
+        public ActionResult Contact()
+        {
+            ViewBag.TollFree = "525-525-525";
+            return View();
+        }
     }
 }
