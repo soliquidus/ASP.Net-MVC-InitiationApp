@@ -211,6 +211,8 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\OurCompanyProducts.cshtml" />
+    <Content Include="Views\Home\RequestExample.cshtml" />
+    <Content Include="Views\Home\ResponseExample.cshtml" />
     <Content Include="Views\Home\StudentDetails.cshtml" />
     <Content Include="Web.config" />
   </ItemGroup>
