@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using EntityFrameworkCodeFirst.Migrations;
 
 namespace EntityFrameworkCodeFirst.Models
 {
@@ -6,6 +7,7 @@ namespace EntityFrameworkCodeFirst.Models
     {
         public CompanyDbContext(): base("dbConnectionString")
         {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<CompanyDbContext, Configuration>());
         }
 
         public DbSet<Brand> Brands { get; set; }
