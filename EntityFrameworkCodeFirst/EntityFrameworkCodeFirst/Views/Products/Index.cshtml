@@ -10,8 +10,8 @@
 
 <a href="/products/create">Create</a>
 <form class="form-inline" action="/products/index">
-    <label for="search" class="mr-1">Search:</label>
-    <input type="search" class="form-control mr-1" id="search" name="search" placeholder="Search" value="@ViewBag.search">
+    @Html.Label("Search", new {@class = "mr-1"})
+    @Html.TextBox("Search", ViewBag.search as string, new {@class = "form-control mr-1", placeholder = "Search"})
     <button type="submit" class="btn btn-primary">GO</button>
 </form>
 
@@ -166,19 +166,21 @@
     @foreach (var item in Model)
     {
         <tr>
-            <td><img src="data:image;base64,@item.Photo" width="100px" /></td>
-            <td>@item.ProductID</td>
-            <td>@item.ProductName</td>
-            <td>@item.Price.Value.ToString("C")</td>
-            <td>@item.Dop.Value.ToString("d/M/yyyy")</td>
-            <td>@item.AvailabilityStatus</td>
-            <td>@item.Category.CategoryName</td>
-            <td>@item.Brand.BrandName</td>
-            <td>@item.Active</td>
             <td>
-                <a href="/products/details/@item.ProductID">Details</a> |
-                <a href="/products/edit/@item.ProductID">Edit</a> |
-                <a href="/products/delete/@item.ProductID">Delete</a>
+                <img src="data:image;base64,@item.Photo" width="100px"/>
+            </td>
+            <td>@Html.DisplayFor(temp => item.ProductID)</td>
+            <td>@Html.DisplayFor(temp => item.ProductName)</td>
+            <td>@Html.DisplayFor(temp => item.Price)</td>
+            <td>@Html.DisplayFor(temp => item.Dop)</td>
+            <td>@Html.DisplayFor(temp => item.AvailabilityStatus)</td>
+            <td>@Html.DisplayFor(temp => item.Category.CategoryName)</td>
+            <td>@Html.DisplayFor(temp => item.Brand.BrandName)</td>
+            <td>@Html.DisplayFor(temp => item.Active)</td>
+            <td>
+                @Html.ActionLink("Details", "Details", new {id = item.ProductID, controller = "Products"}) |
+                @Html.ActionLink("Edit", "Edit", new {id = item.ProductID, controller = "Products"}) |
+                @Html.ActionLink("Delete", "Delete", new {id = item.ProductID, controller = "Products"})
             </td>
         </tr>
     }
