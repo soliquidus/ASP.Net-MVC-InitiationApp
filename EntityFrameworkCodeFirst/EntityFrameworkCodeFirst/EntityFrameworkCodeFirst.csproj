@@ -126,6 +126,10 @@
     <Compile Include="Migrations\202311141244502_quantityColumn.designer.cs">
       <DependentUpon>202311141244502_quantityColumn.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202311141613162_RequiredValidation.cs" />
+    <Compile Include="Migrations\202311141613162_RequiredValidation.designer.cs">
+      <DependentUpon>202311141613162_RequiredValidation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Brand.cs" />
     <Compile Include="Models\Category.cs" />
@@ -153,6 +157,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202311141244502_quantityColumn.resx">
       <DependentUpon>202311141244502_quantityColumn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202311141613162_RequiredValidation.resx">
+      <DependentUpon>202311141613162_RequiredValidation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

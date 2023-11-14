@@ -12,9 +12,11 @@ namespace EntityFrameworkCodeFirst.Models
         public long ProductID { get; set; }
         
         [Display(Name = "Product Name")]
+        [Required]
         public string ProductName { get; set; }
         
         [Display(Name = "Price")]
+        [Required]
         public decimal? Price { get; set; }
         
         [Column("DateOfPurchase", TypeName = "datetime")]
@@ -25,9 +27,11 @@ namespace EntityFrameworkCodeFirst.Models
         public string AvailabilityStatus { get; set; }
         
         [Display(Name = "Category Id")]
+        [Required]
         public long? CategoryID { get; set; }
         
         [Display(Name = "Brand Id")]
+        [Required]
         public long? BrandID { get; set; }
         
         [Display(Name = "Active")]
