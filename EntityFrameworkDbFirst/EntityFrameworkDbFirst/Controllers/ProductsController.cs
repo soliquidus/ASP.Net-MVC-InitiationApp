@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 using EntityFrameworkDbFirst.Models;
 
@@ -94,6 +95,17 @@ namespace EntityFrameworkDbFirst.Controllers
         public ActionResult Create(Product p)
         {
             EntityFrameworkDbFirstDBEntities db = new EntityFrameworkDbFirstDBEntities();
+            if (Request.Files.Count >= 1)
+            {
+                HttpPostedFileBase file = Request.Files[0];
+                if (file != null)
+                {
+                    byte[] imgBytes = new Byte[file.ContentLength];
+                    file.InputStream.Read(imgBytes, 0, file.ContentLength);
+                    var base64String = Convert.ToBase64String(imgBytes, 0, imgBytes.Length);
+                    p.Photo = base64String;
+                }
+            }
             db.Products.Add(p);
             db.SaveChanges();
             return RedirectToAction("Index");

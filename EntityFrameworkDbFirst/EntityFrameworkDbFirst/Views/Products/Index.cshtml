@@ -166,6 +166,7 @@
     @foreach (var item in Model)
     {
         <tr>
+            <td><img src="data:image;base64,@item.Photo" width="100px" /></td>
             <td>@item.ProductID</td>
             <td>@item.ProductName</td>
             <td>@item.Price.Value.ToString("C")</td>
