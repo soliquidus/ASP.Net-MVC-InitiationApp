@@ -40,8 +40,8 @@ namespace EntityFrameworkCodeFirst.Controllers
             else if (ViewBag.SortColumn == "DateOfPurchase")
             {
                 products = ViewBag.IconClass == "fa-sort-asc" ? 
-                    products.OrderBy(temp => temp.DateOfPurchase).ToList() : 
-                    products.OrderByDescending(temp => temp.DateOfPurchase).ToList();
+                    products.OrderBy(temp => temp.Dop).ToList() : 
+                    products.OrderByDescending(temp => temp.Dop).ToList();
             }
             else if (ViewBag.SortColumn == "AvailabilityStatus")
             {
@@ -123,7 +123,7 @@ namespace EntityFrameworkCodeFirst.Controllers
             Product existingProduct = _db.Products.FirstOrDefault(temp => temp.ProductID == p.ProductID);
             existingProduct.ProductName = p.ProductName;
             existingProduct.Price = p.Price;
-            existingProduct.DateOfPurchase = p.DateOfPurchase;
+            existingProduct.Dop = p.Dop;
             existingProduct.CategoryID = p.CategoryID;
             existingProduct.BrandID = p.BrandID;
             existingProduct.AvailabilityStatus = p.AvailabilityStatus;
