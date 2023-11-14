@@ -9,8 +9,7 @@
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
-            ContextKey = "EntityFrameworkCodeFirst.Models.CompanyDbContext";
+            AutomaticMigrationsEnabled = false;
         }
 
         protected override void Seed(EntityFrameworkCodeFirst.Models.CompanyDbContext context)
@@ -21,7 +20,7 @@
             //  to avoid creating duplicate seed data.
             context.Brands.AddOrUpdate(new Models.Brand() { BrandID = 1, BrandName = "Samsung" });
             context.Categories.AddOrUpdate(new Models.Category() { CategoryID = 1, CategoryName = "Electronics" });
-            context.Products.AddOrUpdate(new Models.Product() { ProductID = 1, ProductName = "Samsung Galaxy Mobile", CategoryID = 1, DateOfPurchase = DateTime.Now, Active = true, BrandID = 1, Photo = null, Price = 10000, AvailabilityStatus = "InStock" });
+            context.Products.AddOrUpdate(new Models.Product() { ProductID = 1, ProductName = "Samsung Galaxy Mobile", CategoryID = 1, DateOfPurchase = DateTime.Now, Active = true, BrandID = 1, Photo = null, Price = 450, AvailabilityStatus = "InStock" });
         }
     }
 }

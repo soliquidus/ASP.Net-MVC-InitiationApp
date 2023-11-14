@@ -15,7 +15,7 @@ namespace EntityFrameworkCodeFirst.Models
         public long? BrandID { get; set; }
         public bool? Active { get; set; }
         public string Photo { get; set; }
-        
+
         public decimal? Quantity { get; set; }
 
         public virtual Brand Brand { get; set; }
