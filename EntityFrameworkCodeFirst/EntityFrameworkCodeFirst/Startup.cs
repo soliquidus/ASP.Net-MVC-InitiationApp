@@ -36,7 +36,7 @@ namespace EntityFrameworkCodeFirst
             if (userManager.FindByName("admin") == null)
             {
                 var user = new ApplicationUser {UserName = "admin", Email = "admin@testdomaine.com"};
-                const string userPassword = "admin";
+                const string userPassword = "admin123";
                 var adminUser = userManager.Create(user, userPassword);
 
                 if (adminUser.Succeeded)

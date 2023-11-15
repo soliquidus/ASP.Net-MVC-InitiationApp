@@ -2,11 +2,11 @@
 @using EntityFrameworkCodeFirst.Views.Helpers
 @{
     ViewBag.Title = "Create Product";
-    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/_adminLayoutPage1.cshtml";
 }
 
 <h2>Create Product</h2>
-@using (Html.BeginForm("Create", "Products", FormMethod.Post, new {enctype = "multipart/form-data"}))
+@using (Html.BeginForm("Create", "Products", new {area = "Admin"}, FormMethod.Post, new {enctype = "multipart/form-data"}))
 {
 <div class="form-row">
     <div class="form-group col-md-6">
@@ -61,7 +61,7 @@
     </div>
     <div class="form-group">
         <div class="form-check">
-            @Html.CheckBoxFor(temp => temp.Active.Value, new {@class = "form-check-input", value = "true"})
+            @Html.CheckBoxFor(temp => temp.Active, new {@class = "form-check-input", value = "true"})
             @Html.LabelFor(temp => temp.Active, new {@class = "form-check-label"})
             @Html.ValidationMessageFor(temp => temp.Photo)
         </div>
@@ -70,5 +70,5 @@
     @Html.ValidationSummary()
 
     <button type="submit" class="btn btn-success">Create</button>
-    <a class="btn btn-danger" href="/products/index">Cancel</a>
+    <a class="btn btn-danger" href="/admin/products/index">Cancel</a>
 }

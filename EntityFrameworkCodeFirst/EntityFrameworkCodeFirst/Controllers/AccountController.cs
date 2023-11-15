@@ -4,12 +4,19 @@ using System.Web.Mvc;
 using EntityFrameworkCodeFirst.Identity;
 using EntityFrameworkCodeFirst.ViewModels;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 
 namespace EntityFrameworkCodeFirst.Controllers
 {
+    
+
     public class AccountController : Controller
     {
+        private static readonly ApplicationDbContext AppDbContext = new ApplicationDbContext();
+        private static readonly ApplicationUserStore UserStore = new ApplicationUserStore(AppDbContext);
+        private static readonly ApplicationUserManager UserManager = new ApplicationUserManager(UserStore);
+        
         // GET: Account/Register
         public ActionResult Register()
         {
@@ -68,16 +75,18 @@ namespace EntityFrameworkCodeFirst.Controllers
         public ActionResult Login(LoginViewModel loginViewModel)
         {
             // Login
-            var appDbContext = new ApplicationDbContext();
-            var userStore = new ApplicationUserStore(appDbContext);
-            var userManager = new ApplicationUserManager(userStore);
-            var user = userManager.Find(loginViewModel.Username, loginViewModel.Password);
+            var user = UserManager.Find(loginViewModel.Username, loginViewModel.Password);
             if (user != null)
             {
                 // Login
                 var authenticationManager = HttpContext.GetOwinContext().Authentication;
-                var userIdentity = userManager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
+                var userIdentity = UserManager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
                 authenticationManager.SignIn(new AuthenticationProperties(), userIdentity);
+                if (UserManager.IsInRole(user.Id, "Admin"))
+                {
+                    return RedirectToAction("Index", "Home", new { area = "Admin" } );
+                }
+                
                 return RedirectToAction("Index", "Home");
             }
 
@@ -91,6 +100,13 @@ namespace EntityFrameworkCodeFirst.Controllers
             var authenticationManager = HttpContext.GetOwinContext().Authentication;
             authenticationManager.SignOut();
             return RedirectToAction("Index", "Home");
+        }
+        
+        // GET: Account/MyProfile
+        public ActionResult MyProfile()
+        {
+            ApplicationUser appUser = UserManager.FindById(User.Identity.GetUserId());
+            return View(appUser);
         }
     }
 }
