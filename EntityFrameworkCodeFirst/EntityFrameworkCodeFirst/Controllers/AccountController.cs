@@ -72,6 +72,7 @@ namespace EntityFrameworkCodeFirst.Controllers
 
         // POST: Account/Login
         [HttpPost]
+        [OverrideExceptionFilters]
         public ActionResult Login(LoginViewModel loginViewModel)
         {
             // Login
