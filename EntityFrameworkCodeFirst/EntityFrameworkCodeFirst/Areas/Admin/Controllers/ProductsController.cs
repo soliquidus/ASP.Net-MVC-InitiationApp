@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
+using EntityFrameworkCodeFirst.Filters;
 using EntityFrameworkCodeFirst.Models;
 
 namespace EntityFrameworkCodeFirst.Areas.Admin.Controllers
 {
+    [AdminAuthorization]
     public class ProductsController : Controller
     {
         private readonly CompanyDbContext _db = new CompanyDbContext();
