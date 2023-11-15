@@ -141,6 +141,7 @@
     <Content Include="Areas\Manager\Views\Products\Edit.cshtml" />
     <Content Include="Areas\Manager\Views\Products\Index.cshtml" />
     <Content Include="Areas\Manager\Views\Shared\_managerLayoutPage1.cshtml" />
+    <Content Include="Error.html" />
     <Content Include="Global.asax" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\MyProfile.cshtml" />
@@ -152,6 +153,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\BrandsController.cs" />
@@ -165,6 +167,13 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Filters\ActionFilter.cs" />
+    <Compile Include="Filters\AdminAuthorization.cs" />
+    <Compile Include="Filters\AuthenticationFilter.cs" />
+    <Compile Include="Filters\CustomerAuthorization.cs" />
+    <Compile Include="Filters\ExceptionFilter.cs" />
+    <Compile Include="Filters\ManagerAuthorization.cs" />
+    <Compile Include="Filters\ResultFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
