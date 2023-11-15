@@ -25,7 +25,23 @@
             <li class="nav-item"><a class="nav-link" href="/categories/index">Categories</a></li>
             <li class="nav-item"><a class="nav-link" href="/brands/index">Brands</a></li>
             <li class="nav-item"><a class="nav-link" href="/products/index">Products</a></li>
+            @if (!User.Identity.IsAuthenticated)
+            {
+                <li class="nav-item"><a class="nav-link" href="/account/register">Register</a></li>
+                <li class="nav-item"><a class="nav-link" href="/account/login">Login</a></li>
+            }
+            @if (User.Identity.IsAuthenticated)
+            {
+                <li class="nav-item"><a class="nav-link" href="/account/logout">Logout</a></li>
+            }
         </ul>
+
+        @if (User.Identity.IsAuthenticated)
+        {
+            <div class="text-white">
+                Welcome @User.Identity.Name!
+            </div>
+        }
     </nav>
     <div class="container-fluid">
         @RenderBody()
