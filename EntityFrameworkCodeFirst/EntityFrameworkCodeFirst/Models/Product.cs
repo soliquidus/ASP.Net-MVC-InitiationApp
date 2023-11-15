@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using EntityFrameworkCodeFirst.Validations;
 
 namespace EntityFrameworkCodeFirst.Models
 {
@@ -12,11 +13,16 @@ namespace EntityFrameworkCodeFirst.Models
         public long ProductID { get; set; }
         
         [Display(Name = "Product Name")]
-        [Required]
+        [Required(ErrorMessage = "Product Name can't be blank")]
+        [RegularExpression(@"^[A-Za-z ]*$", ErrorMessage = "Alphabets only")]
+        [MaxLength(40, ErrorMessage = "Product name can be maximum 40 characters long")]
+        [MinLength(2, ErrorMessage = "Product name should contain at least 2 characters")]
         public string ProductName { get; set; }
         
         [Display(Name = "Price")]
-        [Required]
+        [Required(ErrorMessage = "Product Price can't be blank")]
+        [Range(0, 10000, ErrorMessage = "Price should be in between 0  and 10000")]
+        [DivisibleBy10(ErrorMessage = "Price should in multiples 10")]
         public decimal? Price { get; set; }
         
         [Column("DateOfPurchase", TypeName = "datetime")]
@@ -24,14 +30,15 @@ namespace EntityFrameworkCodeFirst.Models
         public DateTime? Dop { get; set; }
         
         [Display(Name = "Availability Status")]
+        [Required(ErrorMessage = "Availability can't be blank")]
         public string AvailabilityStatus { get; set; }
         
         [Display(Name = "Category Id")]
-        [Required]
+        [Required(ErrorMessage = "Category can't be blank")]
         public long? CategoryID { get; set; }
         
         [Display(Name = "Brand Id")]
-        [Required]
+        [Required(ErrorMessage = "Brand can't be blank")]
         public long? BrandID { get; set; }
         
         [Display(Name = "Active")]
