@@ -86,6 +86,11 @@ namespace EntityFrameworkCodeFirst.Controllers
                 {
                     return RedirectToAction("Index", "Home", new { area = "Admin" } );
                 }
+
+                if (UserManager.IsInRole(user.Id, "Manager"))
+                {
+                    return RedirectToAction("Index", "Home", new { area = "Manager" } );
+                }
                 
                 return RedirectToAction("Index", "Home");
             }
