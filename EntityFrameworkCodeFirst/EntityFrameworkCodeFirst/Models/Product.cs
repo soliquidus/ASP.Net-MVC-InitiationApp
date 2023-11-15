@@ -21,12 +21,13 @@ namespace EntityFrameworkCodeFirst.Models
         
         [Display(Name = "Price")]
         [Required(ErrorMessage = "Product Price can't be blank")]
-        [Range(0, 10000, ErrorMessage = "Price should be in between 0  and 10000")]
+        [Range(0, 100000, ErrorMessage = "Price should be in between 0  and 100000")]
         [DivisibleBy10(ErrorMessage = "Price should in multiples 10")]
         public decimal? Price { get; set; }
         
         [Column("DateOfPurchase", TypeName = "datetime")]
         [Display(Name = "Date of Purchase")]
+        [DisplayFormat(DataFormatString = "MM/dd/yyyy", ApplyFormatInEditMode = true)]
         public DateTime? Dop { get; set; }
         
         [Display(Name = "Availability Status")]
@@ -35,14 +36,14 @@ namespace EntityFrameworkCodeFirst.Models
         
         [Display(Name = "Category Id")]
         [Required(ErrorMessage = "Category can't be blank")]
-        public long? CategoryID { get; set; }
+        public long CategoryID { get; set; }
         
         [Display(Name = "Brand Id")]
         [Required(ErrorMessage = "Brand can't be blank")]
-        public long? BrandID { get; set; }
+        public long BrandID { get; set; }
         
         [Display(Name = "Active")]
-        public bool? Active { get; set; }
+        public bool Active { get; set; }
         
         [Display(Name = "Photo")]
         public string Photo { get; set; }

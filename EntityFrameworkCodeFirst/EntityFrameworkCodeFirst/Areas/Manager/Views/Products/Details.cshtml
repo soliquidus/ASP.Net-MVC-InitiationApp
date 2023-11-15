@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Product Details";
-    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+    Layout = "~/Areas/Manager/Views/Shared/_managerLayoutPage1.cshtml";
 }
 
 <h2>Product Details</h2>
@@ -29,7 +29,7 @@
         <td>
             @if (Model.Dop.HasValue)
             {
-                @Model.Dop.Value.ToString("d/M/yyyy")
+                @Model.Dop.Value.ToString("dd/MM/yyyy")
             }
         </td>
     </tr>
@@ -61,4 +61,4 @@
     </tr>
 </table>
 
-<a href="/products/index">Back to Products</a>
+<a href="/manager/products/index">Back to Products</a>

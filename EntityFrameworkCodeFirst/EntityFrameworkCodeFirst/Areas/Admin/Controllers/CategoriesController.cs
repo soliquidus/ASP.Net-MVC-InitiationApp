@@ -3,11 +3,11 @@ using System.Linq;
 using System.Web.Mvc;
 using EntityFrameworkCodeFirst.Models;
 
-namespace EntityFrameworkCodeFirst.Controllers
+namespace EntityFrameworkCodeFirst.Areas.Admin.Controllers
 {
     public class CategoriesController : Controller
     {
-        // GET
+        // GET: Categories/Index
         public ActionResult Index()
         {
             CompanyDbContext db = new CompanyDbContext();
