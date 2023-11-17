@@ -78,6 +78,7 @@ namespace EntityFrameworkCodeFirst.Areas.Manager.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ProductID, ProductName, Price, Dop, AvailabilityStatus, CategoryID, BrandID, Active, Photo")] Product p)
 
         {
@@ -114,6 +115,7 @@ namespace EntityFrameworkCodeFirst.Areas.Manager.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Edit(Product p)
         {
             if (ModelState.IsValid)

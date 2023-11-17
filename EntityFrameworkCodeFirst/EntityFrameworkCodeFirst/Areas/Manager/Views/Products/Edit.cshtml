@@ -9,6 +9,7 @@
 @using (Html.BeginForm("Edit", "Products", new { area = "Manager" }, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.HiddenFor(temp => temp.ProductID)
+    @Html.AntiForgeryToken()
     <div class="form-row">
         <div class="form-group col-md-6">
             @Html.LabelFor(temp => temp.ProductName)
