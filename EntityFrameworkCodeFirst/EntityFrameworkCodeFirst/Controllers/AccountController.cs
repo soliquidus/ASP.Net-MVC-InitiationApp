@@ -18,7 +18,8 @@ namespace EntityFrameworkCodeFirst.Controllers
         private static readonly ApplicationUserManager UserManager = new ApplicationUserManager(UserStore);
         
         // GET: Account/Register
-        public ActionResult Register()
+        [ActionName("Register")]
+        public ActionResult RegisterPage()
         {
             return View();
         }
@@ -53,9 +54,7 @@ namespace EntityFrameworkCodeFirst.Controllers
                     userManager.AddToRole(user.Id, "Customer");
 
                     // Login
-                    var authenticationManager = HttpContext.GetOwinContext().Authentication;
-                    var userIdentity = userManager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
-                    authenticationManager.SignIn(new AuthenticationProperties(), userIdentity);
+                    this.LoginUser(user);
                 }
                 return RedirectToAction("Index", "Home");
             }
@@ -63,6 +62,7 @@ namespace EntityFrameworkCodeFirst.Controllers
             ModelState.AddModelError("Registration error", "Invalid data");
             return View();
         }
+        
 
         // GET: Account/Login
         public ActionResult Login()
@@ -80,9 +80,8 @@ namespace EntityFrameworkCodeFirst.Controllers
             if (user != null)
             {
                 // Login
-                var authenticationManager = HttpContext.GetOwinContext().Authentication;
-                var userIdentity = UserManager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
-                authenticationManager.SignIn(new AuthenticationProperties(), userIdentity);
+                this.LoginUser(user);
+                
                 if (UserManager.IsInRole(user.Id, "Admin"))
                 {
                     return RedirectToAction("Index", "Home", new { area = "Admin" } );
@@ -113,6 +112,14 @@ namespace EntityFrameworkCodeFirst.Controllers
         {
             ApplicationUser appUser = UserManager.FindById(User.Identity.GetUserId());
             return View(appUser);
+        }
+        
+        [NonAction]
+        private void LoginUser(ApplicationUser user)
+        {
+            var authenticationManager = HttpContext.GetOwinContext().Authentication;
+            var userIdentity = UserManager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
+            authenticationManager.SignIn(new AuthenticationProperties(), userIdentity);
         }
     }
 }

@@ -16,5 +16,11 @@ namespace EntityFrameworkCodeFirst.Controllers
             List<Product> products = db.Products.ToList();
             return View(products);
         }
+
+        [ChildActionOnly]
+        public ActionResult DisplaySingleProduct(Product p)
+        {
+            return PartialView("MyProduct", p);
+        }
     }
 }

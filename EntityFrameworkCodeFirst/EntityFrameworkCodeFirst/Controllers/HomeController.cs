@@ -7,6 +7,7 @@ namespace EntityFrameworkCodeFirst.Controllers
     {
         [ActionFilter]
         [ResultFilter]
+        [OutputCache(Duration = 60)]
         public ActionResult Index()
         {
             return View();
