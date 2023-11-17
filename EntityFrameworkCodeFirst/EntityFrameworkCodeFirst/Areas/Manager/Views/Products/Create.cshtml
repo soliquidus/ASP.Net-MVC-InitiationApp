@@ -8,18 +8,19 @@
 <h2>Create Product</h2>
 @using (Html.BeginForm("Create", "Products", new {area = "Manager"}, FormMethod.Post, new {enctype = "multipart/form-data"}))
 {
-<div class="form-row">
-    <div class="form-group col-md-6">
-        @Html.LabelFor(temp => temp.ProductName)
-        @Html.TextBoxFor(temp => temp.ProductName, new {placeholder = "Product Name", @class = "form-control"})
-        @Html.ValidationMessageFor(temp => temp.ProductName)
+    @Html.AntiForgeryToken()
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            @Html.LabelFor(temp => temp.ProductName)
+            @Html.TextBoxFor(temp => temp.ProductName, new {placeholder = "Product Name", @class = "form-control"})
+            @Html.ValidationMessageFor(temp => temp.ProductName)
+        </div>
+        <div class="form-group col-md-6">
+            @Html.LabelFor(temp => temp.Price)
+            @Html.TextBoxFor(temp => temp.Price, new {placeholder = "Price", @class = "form-control"})
+            @Html.ValidationMessageFor(temp => temp.Price)
+        </div>
     </div>
-    <div class="form-group col-md-6">
-        @Html.LabelFor(temp => temp.Price)
-        @Html.TextBoxFor(temp => temp.Price, new {placeholder = "Price", @class = "form-control"})
-        @Html.ValidationMessageFor(temp => temp.Price)
-    </div>
-</div>
     <div class="form-row">
         <div class="form-group col-md-6">
             @Html.LabelFor(temp => temp.Dop)
@@ -41,7 +42,7 @@
         @* @Html.DropDownListFor(temp => temp.AvailabilityStatus, new List<SelectListItem>() { *@
         @*             new SelectListItem() { Text = "In Stock", Value = "InStock" }, *@
         @*             new SelectListItem() { Text = "Out of Stock", Value = "OutOfStock" } *@
-        @*         }, "Please Select", new { @class ="form-control" })*@ 
+        @*         }, "Please Select", new { @class ="form-control" })*@
     </div>
     <div class="form-row">
         <div class="form-group col-md-6">
@@ -66,7 +67,7 @@
             @Html.ValidationMessageFor(temp => temp.Photo)
         </div>
     </div>
-    
+
     @Html.ValidationSummary()
 
     <button type="submit" class="btn btn-success">Create</button>
