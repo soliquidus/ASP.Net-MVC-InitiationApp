@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using EntityFrameworkCodeFirst.Filters;
 
 namespace EntityFrameworkCodeFirst
@@ -8,6 +9,7 @@ namespace EntityFrameworkCodeFirst
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new ExceptionFilter());
+            filters.Add(new HandleErrorAttribute() { ExceptionType = typeof(Exception), View = "Error" });
         }
     }
 }
