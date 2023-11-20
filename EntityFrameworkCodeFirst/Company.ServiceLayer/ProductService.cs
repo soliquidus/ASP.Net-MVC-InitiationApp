@@ -1,62 +1,58 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Company.DataLayer;
+﻿using System;
+using System.Collections.Generic;
 using Company.DomainModels;
+using Company.RepositoryContracts;
 using Company.ServiceContracts;
 
 namespace Company.ServiceLayer
 {
     public class ProductService: IProductsService
     {
-        private readonly CompanyDbContext _db = new CompanyDbContext();
+        private readonly IProductsRepository _productsRepository;
+
+        public ProductService(IProductsRepository productsRepository)
+        {
+            _productsRepository = productsRepository;
+        }
 
         public List<Product> GetProducts()
         {
-            var products = _db.Products.ToList();
+            var products = _productsRepository.GetProducts();
             return products;
         }
 
         public List<Product> SearchProducts(string productName)
         {
-            var products = _db.Products.Where(p => p.ProductName.Contains(productName)).ToList();
+            var products = _productsRepository.SearchProducts(productName);
             return products;
         }
 
         public Product GetProductByProductId(long productId)
         {
-            var product = _db.Products.FirstOrDefault(p => p.ProductID == productId);
+            var product = _productsRepository.GetProductByProductId(productId);
             return product;
         }
 
         public void InsertProduct(Product product)
         {
-            _db.Products.Add(product);
-            _db.SaveChanges();
+            if (product.Price <= 100000)
+            {
+                _productsRepository.InsertProduct(product);    
+            }
+            else
+            {
+                throw new Exception("Price exceeds limit");
+            }
         }
 
         public void UpdateProduct(Product product)
         {
-            var existingProduct = _db.Products.FirstOrDefault(temp => temp.ProductID == product.ProductID);
-            if (existingProduct != null)
-            {
-                existingProduct.ProductName = product.ProductName;
-                existingProduct.Price = product.Price;
-                existingProduct.Dop = product.Dop;
-                existingProduct.CategoryID = product.CategoryID;
-                existingProduct.BrandID = product.BrandID;
-                existingProduct.AvailabilityStatus = product.AvailabilityStatus;
-                existingProduct.Active = product.Active;
-                existingProduct.Photo = product.Photo;
-            }
-
-            _db.SaveChanges();
+            _productsRepository.UpdateProduct(product);
         }
 
         public void DeleteProduct(long productId)
         {
-            var existingProduct = _db.Products.FirstOrDefault(temp => temp.ProductID == productId);
-            if (existingProduct != null) _db.Products.Remove(existingProduct);
-            _db.SaveChanges();
+            _productsRepository.DeleteProduct(productId);
         }
     }
 }

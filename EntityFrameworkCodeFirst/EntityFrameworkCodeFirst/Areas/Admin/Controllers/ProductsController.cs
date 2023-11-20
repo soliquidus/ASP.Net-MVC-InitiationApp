@@ -1,22 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 using Company.DataLayer;
-using EntityFrameworkCodeFirst.Filters;
 using Company.DomainModels;
 using Company.ServiceContracts;
-using Company.ServiceLayer;
+using EntityFrameworkCodeFirst.Filters;
 
 namespace EntityFrameworkCodeFirst.Areas.Admin.Controllers
 {
     [AdminAuthorization]
     public class ProductsController : Controller
     {
-        private readonly CompanyDbContext _db = new CompanyDbContext();
-        private IProductsService _productsService = new ProductService();
-        
+        private readonly CompanyDbContext _db;
+        private readonly IProductsService _productsService;
+
+        public ProductsController(IProductsService productsService, CompanyDbContext db)
+        {
+            _productsService = productsService;
+            _db = db;
+        }
+
         public ActionResult Index(string search = "", string sortColumn = "ProductName", string iconClass = "fa-sort-asc", int pageNo = 1)
         {
             ViewBag.search = search;
