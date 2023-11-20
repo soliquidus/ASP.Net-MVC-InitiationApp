@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
+using Company.DataLayer;
 using EntityFrameworkCodeFirst.Filters;
-using EntityFrameworkCodeFirst.Models;
+using Company.DomainModels;
 
 namespace EntityFrameworkCodeFirst.Areas.Manager.Controllers
 {

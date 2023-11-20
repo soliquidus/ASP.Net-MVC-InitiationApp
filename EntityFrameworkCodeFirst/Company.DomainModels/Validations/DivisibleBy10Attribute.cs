@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace EntityFrameworkCodeFirst.Validations
+namespace Company.DomainModels.Validations
 {
     public class DivisibleBy10Attribute: ValidationAttribute
     {

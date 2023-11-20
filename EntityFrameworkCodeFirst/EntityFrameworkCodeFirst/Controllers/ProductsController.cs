@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using Company.DataLayer;
+using Company.DomainModels;
 using EntityFrameworkCodeFirst.Filters;
-using EntityFrameworkCodeFirst.Models;
 
 namespace EntityFrameworkCodeFirst.Controllers
 {

@@ -1,18 +1,16 @@
-﻿namespace EntityFrameworkCodeFirst.Migrations
-{
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
+﻿using System.Data.Entity.Migrations;
+using Company.DataLayer;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<EntityFrameworkCodeFirst.Models.CompanyDbContext>
+namespace EntityFrameworkCodeFirst.Migrations
+{
+    public sealed class Configuration : DbMigrationsConfiguration<CompanyDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(EntityFrameworkCodeFirst.Models.CompanyDbContext context)
+        protected override void Seed(CompanyDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 

@@ -1,13 +1,13 @@
 ﻿using System.Data.Entity;
-using EntityFrameworkCodeFirst.Migrations;
+using Company.DomainModels;
 
-namespace EntityFrameworkCodeFirst.Models
+namespace Company.DataLayer
 {
     public class CompanyDbContext: DbContext
     {
         public CompanyDbContext(): base("dbConnectionString")
         {
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<CompanyDbContext, Configuration>());
+            // Database.SetInitializer(new MigrateDatabaseToLatestVersion<CompanyDbContext, Configuration>());
         }
 
         public DbSet<Brand> Brands { get; set; }
