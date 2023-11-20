@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
+using Company.DataLayer;
 using EntityFrameworkCodeFirst.Filters;
-using EntityFrameworkCodeFirst.Models;
+using Company.DomainModels;
+using Company.ServiceContracts;
+using Company.ServiceLayer;
 
 namespace EntityFrameworkCodeFirst.Areas.Admin.Controllers
 {
@@ -12,11 +15,12 @@ namespace EntityFrameworkCodeFirst.Areas.Admin.Controllers
     public class ProductsController : Controller
     {
         private readonly CompanyDbContext _db = new CompanyDbContext();
-
+        private IProductsService _productsService = new ProductService();
+        
         public ActionResult Index(string search = "", string sortColumn = "ProductName", string iconClass = "fa-sort-asc", int pageNo = 1)
         {
             ViewBag.search = search;
-            List<Product> products = _db.Products.Where(temp => temp.ProductName.Contains(search)).Include(product => product.Category).Include(product1 => product1.Brand).ToList();
+            List<Product> products = _productsService.SearchProducts(search);
 
             /*Sorting*/
             ViewBag.SortColumn = sortColumn;
@@ -64,7 +68,7 @@ namespace EntityFrameworkCodeFirst.Areas.Admin.Controllers
         // Read
         public ActionResult Details(long id)
         {
-            Product p = _db.Products.FirstOrDefault(temp => temp.ProductID == id);
+            Product p = _productsService.GetProductByProductId(id);
             return View(p);
         }
 
@@ -93,8 +97,7 @@ namespace EntityFrameworkCodeFirst.Areas.Admin.Controllers
                     p.Photo = base64String;
                 }
 
-                _db.Products.Add(p);
-                _db.SaveChanges();
+                _productsService.InsertProduct(p);
                 return RedirectToAction("Index");
             }
             else
@@ -108,7 +111,7 @@ namespace EntityFrameworkCodeFirst.Areas.Admin.Controllers
         // Update
         public ActionResult Edit(long id)
         {
-            Product existingProduct = _db.Products.FirstOrDefault(temp => temp.ProductID == id);
+            Product existingProduct = _productsService.GetProductByProductId(id);
             ViewBag.Categories = _db.Categories.ToList();
             ViewBag.Brands = _db.Brands.ToList();
             return View(existingProduct);
@@ -120,7 +123,7 @@ namespace EntityFrameworkCodeFirst.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                Product existingProduct = _db.Products.FirstOrDefault(temp => temp.ProductID == p.ProductID);
+                Product existingProduct = _productsService.GetProductByProductId(p.ProductID);
                 if (Request.Files.Count >= 1)
                 {
                     var file = Request.Files[0];
@@ -141,7 +144,7 @@ namespace EntityFrameworkCodeFirst.Areas.Admin.Controllers
                     existingProduct.Active = p.Active;
                 }
 
-                _db.SaveChanges();
+                _productsService.UpdateProduct(p);
             }
 
             return RedirectToAction("Index", "Products");
@@ -150,16 +153,14 @@ namespace EntityFrameworkCodeFirst.Areas.Admin.Controllers
         // Delete
         public ActionResult Delete(long id)
         {
-            Product existingProduct = _db.Products.FirstOrDefault(temp => temp.ProductID == id);
+            Product existingProduct = _productsService.GetProductByProductId(id);
             return View(existingProduct);
         }
 
         [HttpPost]
         public ActionResult Delete(long id, Product p)
         {
-            Product existingProduct = _db.Products.FirstOrDefault(temp => temp.ProductID == id);
-            _db.Products.Remove(existingProduct);
-            _db.SaveChanges();
+            _productsService.DeleteProduct(id);
             return RedirectToAction("Index", "Products");
         }
     }

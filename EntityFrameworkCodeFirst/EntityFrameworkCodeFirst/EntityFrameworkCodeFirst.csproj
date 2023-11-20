@@ -215,13 +215,8 @@
       <DependentUpon>202311151140341_RemovingNullColumns.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\Brand.cs" />
-    <Compile Include="Models\Category.cs" />
-    <Compile Include="Models\CompanyDbContext.cs" />
-    <Compile Include="Models\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="Validations\DivisibleBy10Attribute.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
   </ItemGroup>
@@ -264,6 +259,24 @@
     <EmbeddedResource Include="Migrations\202311151140341_RemovingNullColumns.resx">
       <DependentUpon>202311151140341_RemovingNullColumns.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Company.DataLayer\Company.DataLayer.csproj">
+      <Project>{b2fc749b-f551-4ee9-bfcc-b3a0dc7bb509}</Project>
+      <Name>Company.DataLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Company.DomainModels\Company.DomainModels.csproj">
+      <Project>{8e0158d5-2bac-45a4-97fd-eef716f075e5}</Project>
+      <Name>Company.DomainModels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Company.ServiceContracts\Company.ServiceContracts.csproj">
+      <Project>{20fde8bc-776a-490c-93ff-24fa30062ff8}</Project>
+      <Name>Company.ServiceContracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Company.ServiceLayer\Company.ServiceLayer.csproj">
+      <Project>{aab4d2b8-5bda-4910-8bf7-02317979c003}</Project>
+      <Name>Company.ServiceLayer</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
